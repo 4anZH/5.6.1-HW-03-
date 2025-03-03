@@ -13,7 +13,7 @@ internal class Program
 
     static void FillUser() 
     {
-        //(string firstName, string secondName, int iAge, bool petExist, int petCount, string[] petName, int colorCount, string[] colorSet) LocalUser;
+        ////(string firstName, string secondName, int iAge, bool petExist, int petCount, string[] petName, int colorCount, string[] colorSet) LocalUser;
 
 
         GlobUser.firstName = CheckStr("Введите имя");

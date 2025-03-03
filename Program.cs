@@ -3,51 +3,47 @@ using static System.Net.Mime.MediaTypeNames;
 internal class Program
 
 {
-    static (string firstName, string secondName, int iAge, bool petExist, int petCount, string[] petName, int colorCount, string[] colorSet) GlobUser;
+    //static (string firstName, string secondName, int iAge, bool petExist, int petCount, string[] petName, int colorCount, string[] colorSet) GlobUser;
     private static void Main(string[] args)
     {
-        FillUser();
+        //GlobUser = SetGlobUser();
+        //FillUser();
 
-        ShowData();
+        ShowData(SetGlobUser());
     }
 
-    static void FillUser() 
+    static (string firstName, string secondName, int iAge, bool petExist, int petCount, string[] petName, int colorCount, string[] colorSet) SetGlobUser()
     {
-        ////(string firstName, string secondName, int iAge, bool petExist, int petCount, string[] petName, int colorCount, string[] colorSet) LocalUser;
+        (string firstName, string secondName, int iAge, bool petExist, int petCount, string[] petName, int colorCount, string[] colorSet) LocalUser;
 
+        LocalUser.firstName = CheckStr("Введите имя");
 
-        GlobUser.firstName = CheckStr("Введите имя");
+        LocalUser.secondName = CheckStr("Введите фамилию");
 
-        GlobUser.secondName = CheckStr("Введите фамилию");
-
-        GlobUser.iAge = CheckNum("Введите возраст цифрами",true);
-
-
+        LocalUser.iAge = CheckNum("Введите возраст цифрами",true);
 
         string sPetExist;
         bool exitDo = true;
         Console.WriteLine("Введите наличие питомца (да или нет)");
         do
         {
-       
-
             sPetExist = Console.ReadLine();
 
             if (sPetExist == "да")
             {
-                GlobUser.petExist = true;
+                LocalUser.petExist = true;
 
-                GlobUser.petCount = CheckNum("Введите кол-во питомцев", true);
+                LocalUser.petCount = CheckNum("Введите кол-во питомцев", true);
 
-                GlobUser.petName = FillArray(GlobUser.petCount,"Имя питомца");
+                LocalUser.petName = FillArray(LocalUser.petCount,"Имя питомца");
 
                exitDo = false;
 
             }
             else if (sPetExist == "нет")
             {
-                GlobUser.petExist = false;
-                GlobUser.petCount = 0;
+                LocalUser.petExist = false;
+                LocalUser.petCount = 0;
                 exitDo = false;
             }
             else
@@ -56,13 +52,14 @@ internal class Program
             }
         } while (exitDo);
 
-        GlobUser.colorCount = CheckNum("Введите колличество любимых цветов цифрами", true);
+        LocalUser.colorCount = CheckNum("Введите колличество любимых цветов цифрами", true);
 
-        GlobUser.colorSet = FillArray(GlobUser.colorCount, "Название цвета");
+        LocalUser.colorSet = FillArray(LocalUser.colorCount, "Название цвета");
 
-       
+        return LocalUser;
 
     }
+
     static string CheckStr(string msg)
     {
         Console.WriteLine(msg);
@@ -134,28 +131,28 @@ internal class Program
         return array;
     }
 
-    static void ShowData()
+    static void ShowData((string firstName, string secondName, int iAge, bool petExist, int petCount, string[] petName, int colorCount, string[] colorSet) LocalUser)
     {
-        Console.WriteLine("Вас зщвут {0} {1}, ваш возраст {2}",GlobUser.firstName,GlobUser.secondName,GlobUser.iAge);
+        Console.WriteLine("Вас зщвут {0} {1}, ваш возраст {2}",LocalUser.firstName,LocalUser.secondName,LocalUser.iAge);
 
-        if (GlobUser.petExist == false)
+        if (LocalUser.petExist == false)
         {
             Console.WriteLine("У вас нет питомцев");
         }
         else
         {
-            string msgPet=$"У вас есть {GlobUser.petCount} питомцев";
-            for (int i = 0; i < GlobUser.petName.Length; i++)
+            string msgPet=$"У вас есть {LocalUser.petCount} питомцев";
+            for (int i = 0; i < LocalUser.petName.Length; i++)
             {
-                msgPet += "\n"+ GlobUser.petName[i];
+                msgPet += "\n"+ LocalUser.petName[i];
             }
             Console.WriteLine(msgPet);
         }
 
         string msgColor = "Ваши любимые цвета";
-        for (int i = 0; i < GlobUser.colorSet.Length; i++)
+        for (int i = 0; i < LocalUser.colorSet.Length; i++)
         {
-            msgColor += "\n" + GlobUser.colorSet[i];
+            msgColor += "\n" + LocalUser.colorSet[i];
         }
         Console.WriteLine(msgColor);
 

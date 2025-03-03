@@ -9,12 +9,12 @@ internal class Program
         //GlobUser = SetGlobUser();
         //FillUser();
 
-        ShowData(SetGlobUser());
+        ShowData(User());
     }
 
-    static (string firstName, string secondName, int iAge, bool petExist, int petCount, string[] petName, int colorCount, string[] colorSet) SetGlobUser()
+    static (string firstName, string secondName, int iAge, bool petExist, int petCount, string[] petName, int colorCount, string[] colorSet) User()
     {
-        (string firstName, string secondName, int iAge, bool petExist, int petCount, string[] petName, int colorCount, string[] colorSet) LocalUser;
+        (string firstName, string secondName, int iAge, bool petExist, int petCount, string[] petName, int colorCount, string[] colorSet) LocalUser = ("", "", 0, false, 0, [], 0, []);
 
         LocalUser.firstName = CheckStr("Введите имя");
 
@@ -35,6 +35,8 @@ internal class Program
 
                 LocalUser.petCount = CheckNum("Введите кол-во питомцев", true);
 
+                //LocalUser.petName = new string[LocalUser.petCount];
+
                 LocalUser.petName = FillArray(LocalUser.petCount,"Имя питомца");
 
                exitDo = false;
@@ -53,6 +55,8 @@ internal class Program
         } while (exitDo);
 
         LocalUser.colorCount = CheckNum("Введите колличество любимых цветов цифрами", true);
+
+        //LocalUser.colorSet = new string[LocalUser.colorCount];
 
         LocalUser.colorSet = FillArray(LocalUser.colorCount, "Название цвета");
 
